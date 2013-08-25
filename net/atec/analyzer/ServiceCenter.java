@@ -3,6 +3,10 @@ package atec.net.atec.analyzer;
 import java.io.DataOutputStream;
 
 public class ServiceCenter {
+	/**
+	 * 
+	 * @param filePath
+	 */
 	public static void copyEventType(String filePath){
 		Process p;
 		try {
