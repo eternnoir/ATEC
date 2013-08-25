@@ -1,4 +1,4 @@
-package atec.net.atec.analyzer;
+package net.atec.analyzer;
 
 import java.io.DataOutputStream;
 
