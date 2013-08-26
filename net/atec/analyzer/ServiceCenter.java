@@ -1,6 +1,16 @@
 package net.atec.analyzer;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import net.atec.sender.DeviceEvent;
+
+import android.util.Log;
 
 public class ServiceCenter {
 	/**
@@ -16,7 +26,14 @@ public class ServiceCenter {
 			String mkdircmd = "mkdir /mnt/sdcard/tmp\n";
 			os.writeBytes(mkdircmd);
 			// Attempt to write a file to a root-only
-			String cmd = "getevent -lp >> "+filePath+"/et1\n";
+			String cmd ;
+			cmd = "rm "+filePath+"/et1\n";
+			os.write(cmd.getBytes());
+			os.flush();
+			cmd = "rm "+filePath+"/et2\n";
+			os.write(cmd.getBytes());
+			os.flush();
+			cmd = "getevent -lp >> "+filePath+"/et1\n";
 			os.write(cmd.getBytes());
 			os.flush();cmd = "getevent -p >> "+filePath+"/et2\n";
 			os.write(cmd.getBytes());
@@ -39,4 +56,59 @@ public class ServiceCenter {
 		copyEventType("/sdcard/tmp");
 	}
 	
+	public static String getEventFormat(String filePath){
+		String ret = null;
+		String fileStream = null;
+		String fileStream2 = null;
+		try {
+			fileStream = getStringFromFile(filePath+"/et1");
+			fileStream2 = getStringFromFile(filePath+"/et2");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		EventParser ep = new EventParser(fileStream,fileStream2);
+		ep.findTouchscreenEvent();
+		ep.findOtherAttr();
+		
+		return ret;
+	}
+	
+	public static DeviceEvent getDeviceEvent(String filePath){
+		DeviceEvent ret = null;
+		String fileStream = null;
+		String fileStream2 = null;
+		try {
+			fileStream = getStringFromFile(filePath+"/et1");
+			fileStream2 = getStringFromFile(filePath+"/et2");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		EventParser ep = new EventParser(fileStream,fileStream2);
+		ep.findTouchscreenEvent();
+		ep.findOtherAttr();
+		ret = ep.getNewDeviceEvent();
+		
+		
+		return ret;
+	}
+	public static String convertStreamToString(InputStream is) throws Exception {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	    StringBuilder sb = new StringBuilder();
+	    String line = null;
+	    while ((line = reader.readLine()) != null) {
+	      sb.append(line).append("\n");
+	    }
+	    return sb.toString();
+	}
+
+	public static String getStringFromFile (String filePath) throws Exception {
+	    File fl = new File(filePath);
+	    FileInputStream fin = new FileInputStream(fl);
+	    String ret = convertStreamToString(fin);
+	    //Make sure you close all streams.
+	    fin.close();        
+	    return ret;
+	}
 }
