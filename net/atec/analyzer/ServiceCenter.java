@@ -35,7 +35,14 @@ public class ServiceCenter {
 			os.flush();
 			cmd = "getevent -lp >> "+filePath+"/et1\n";
 			os.write(cmd.getBytes());
-			os.flush();cmd = "getevent -p >> "+filePath+"/et2\n";
+			os.flush();
+			cmd = "getevent -p >> "+filePath+"/et2\n";
+			os.write(cmd.getBytes());
+			os.flush();
+			cmd = "chmod 777 "+filePath+"/et1\n";
+			os.write(cmd.getBytes());
+			os.flush();
+			cmd = "chmod 777 "+filePath+"/et2\n";
 			os.write(cmd.getBytes());
 			os.flush();
 			os.writeBytes("exit\n");
