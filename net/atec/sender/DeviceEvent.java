@@ -48,4 +48,8 @@ public class DeviceEvent {
 		return _event+" "+_abs+" "+_PRESSURE+" ";
 	}
 	
+	public String getPMax(){
+		return _pMax;
+	}
+	
 }
