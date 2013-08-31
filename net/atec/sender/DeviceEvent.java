@@ -48,8 +48,11 @@ public class DeviceEvent {
 		return _event+" "+_abs+" "+_PRESSURE+" ";
 	}
 	
-	public String getPMax(){
+	public String getPressureMax(){
 		return _pMax;
+	}
+	public String getTracningIdMax(){
+		return _tiMax;
 	}
 	
 }
