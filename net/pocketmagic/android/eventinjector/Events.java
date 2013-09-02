@@ -121,6 +121,10 @@ public class Events
 			}
 			return 1;
 		}
+		public int SendEvent(int abs, int type,int value ) {
+			intSendEvent(m_nId, abs, type, value); //set x coord
+			return 0;
+		}
 		public int SendTouchAbsCoord(int x, int y ) {
 			intSendEvent(m_nId, EV_ABS, REL_X, x); //set x coord
 			intSendEvent(m_nId, EV_ABS, REL_Y, y); //set y coord
