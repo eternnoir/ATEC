@@ -26,6 +26,9 @@ public class DeviceEvent {
 		_pMax = pM;
 	}
 	
+	public String getEvent(){
+		return _event;
+	}
 	public String getBlankEvent(){
 		return _event+" 0 0 0";
 	}
@@ -34,6 +37,18 @@ public class DeviceEvent {
 	}
 	public String getPosYEvent(){
 		return _event+" "+_abs+" "+_Pos_Y+" ";
+	}
+	public int getXid(){
+		return Integer.parseInt(_Pos_X);
+	}
+	public int getYid(){
+		return Integer.parseInt(_Pos_Y);
+	}
+	public int getTrackingIDid(){
+		return Integer.parseInt(_TRACKING_ID);
+	}
+	public int getPurssureid(){
+		return Integer.parseInt(_PRESSURE);
 	}
 	public String getScreenXMax(){
 		return _xMax;
