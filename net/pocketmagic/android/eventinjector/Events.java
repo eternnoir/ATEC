@@ -123,6 +123,7 @@ public class Events
 		}
 		public int SendTouchAbsCoord(int x, int y ) {
 			intSendEvent(m_nId, EV_ABS, REL_X, x); //set x coord
+			intSendEvent(m_nId, 0, 0,0);
 			intSendEvent(m_nId, EV_ABS, REL_Y, y); //set y coord
 			intSendEvent(m_nId, 0, 0,0);
 			return 0;
