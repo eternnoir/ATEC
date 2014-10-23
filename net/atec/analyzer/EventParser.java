@@ -43,7 +43,7 @@ public class EventParser {
 						int in = tmp.indexOf("/");
 						_eventType = tmp.substring(in);
 						break;
-						
+
 					}
 					else {
 						eventIndex ++;
@@ -55,7 +55,7 @@ public class EventParser {
 			if(_eventType!= null){
 				break;
 			}
-		}	
+		}
 		return _eventType;
 	}
 	public void findOtherAttr(){
@@ -96,7 +96,8 @@ public class EventParser {
 		String valueId;
 		String valueMax ="";
 		String tmpX[] = str.split(":");
-		tmpX[0] = tmpX[0].replace(" ", "");
+		tmpX[0] = tmpX[0].trim();
+        tmpX[1] = tmpX[1].trim();
 		valueId = Integer.parseInt(tmpX[0], 16)+"";
 		String values[] = tmpX[1].split(",");
 		for(int x=0;x<values.length;x++){
